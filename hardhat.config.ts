@@ -23,7 +23,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 // Go to https://hardhat.org/config/ to learn more
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.7",
+  solidity: "0.8.9",
   networks: {
     bsc_mainnet: {
       url: process.env.BSC_MAINNET_URL || "",
@@ -55,24 +55,47 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
+    arb_mainnet: {
+      url: process.env.ARB_MAINNET_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    base_mainnet: {
+      url: process.env.BASE_MAINNET_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
   },
   etherscan: {
+    apiKey: process.env.BASESCAN_API_KEY,
     //apiKey: process.env.BSCSCAN_API_KEY,
     //apiKey: process.env.ETHERSCAN_API_KEY,
     //apiKey: process.env.POLYGON_API_KEY,
     //apiKey: process.env.AVALANCHE_API_KEY,
     //apiKey: process.env.OPERA_API_KEY,
-    apiKey: process.env.CRONOSCAN_API_KEY,
+    // apiKey: process.env.ARBISCAN_API_KEY,
+    //apiKey: process.env.CRONOSCAN_API_KEY,
+    // customChains: [
+    //     {
+    //         network: "cronos",
+    //         chainId: 25,
+    //         urls: {
+    //             apiURL: "https://api.cronoscan.com/api",
+    //             browserURL: "https://cronoscan.com/"
+    //         },
+    //     },
+    // ],
+    // custom for base
     customChains: [
-        {
-            network: "cronos",
-            chainId: 25,
-            urls: {
-                apiURL: "https://api.cronoscan.com/api",
-                browserURL: "https://cronoscan.com/"
-            },
-        },
-    ],
+      {
+          network: "base",
+          chainId: 8453,
+          urls: {
+              apiURL: "https://api.basescan.org/api",
+              browserURL: "https://basescan.org/"
+          },
+      },
+  ],
   },
 };
 
